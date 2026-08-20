@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Etapa 3</title>
+    <link rel="stylesheet" href="css/cadastro.css">
+    <link rel="icon" type="image/png" href="img/iconb.png">
+</head>
+<body>
+    
+    <header>
+        <div class="topo">
+            <img src="img/logo.png" alt="Logo do DevHub" class="logo">
+        </div>
+        <nav>
+            <a href="index.html">Início</a>
+            
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <aside class="lateral">
+            <div class="lateral-conteudo">
+                <h1>Você imagina, nós desenvolvemos.</h1>
+                <p>Crie seu cadastro em segundos, centralize suas propostas comerciais e conecte-se sem intermediários burocráticos ou taxas abusivas.</p>
+            </div>
+            <div class="lateral-rodape">
+                <span>© DEVHUB 2026</span>
+                <span> BRASIL</span>
+            </div>
+        </aside>
+        <main class="form-area">
+            <div class="form-wrapper">
+                <form id="formularioCadastro3">
+                    <div class="step-header">Etapa 03 de 03</div>
+                    <h2 class="step-title">Definir Credenciais</h2>
+                    <div class="progress-container">
+                        <div class="progress-bar active"></div>
+                        <div class="progress-bar active"></div>
+                        <div class="progress-bar active"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Defina sua Senha</label>
+                            <input type="password" id="senhaCliente" placeholder="Mínimo 6 caracteres" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Confirme sua Senha</label>
+                            <input type="password" id="confirmarSenha" placeholder="Repita a mesma senha" required>
+                        </div>
+                    </div>
+                    <div class="terms-container">
+                        <input type="checkbox" id="terms" required>
+                        <label for="terms">
+                            <strong>Aceito os Termos de Intermediação DevHub</strong><br>
+                            <span style="font-size: 0.75rem; color: #888;">Declaro estar em total conformidade em não expor credenciais externas de API de forma insegura...</span>
+                        </label>
+                    </div>
+                    <div class="form-footer">
+                        <button type="button" class="btn-cancelar" onclick="window.location.href='cadastro2.html'">← Voltar</button>
+                        <button type="submit" class="btn-continuar">Finalizar Cadastro ✓</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bcryptjs@2.4.3/dist/bcrypt.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bcryptjs/2.4.3/bcrypt.min.js"></script>
+    <script src="js/cadastro.js"></script>
+</body>
+</html>

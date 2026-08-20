@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Solicitações - DevHub</title>
+    <link rel="stylesheet" href="css/cliente.css">
+    <link rel="icon" type="image/png" href="img/iconb.png">
+</head>
+
+<body>
+    
+    <header>
+        <div class="topo">
+            <img src="img/logo.png" alt="Logo do DevHub" class="logo">
+        </div>
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="#" id="btnSair" style="color: #fca5a5; font-weight: 600;">Sair</a>
+            <a href="solicitacao.html">Criar Nova Solicitação</a>
+        </nav>
+    </header>
+
+    <main class="container-painel">
+        <div class="cabecalho-painel">
+            <div class="textos-cabecalho">
+                <div class="marcador-topo">
+                    <span class="ponto-verde"></span>
+                    <span class="texto-marcador">Central do Solicitante</span>
+                </div>
+                <h1 class="titulo-painel">Minhas Solicitações de Sites</h1>
+                <p class="descricao-painel">Veja abaixo o andamento dos seus briefings e analise as propostas comerciais enviadas pelos programadores.</p>
+            </div>
+            <button class="botao-novo-pedido" onclick="window.location.href='solicitacao.html'">
+                <span class="icone-mais">✦</span> Fazer Novo Pedido
+            </button>
+        </div>
+
+        <div class="grade-projetos"></div>
+
+        <footer>
+            <div class="area-imagem-rodape">
+                <img src="img/iconp.png" alt="Imagem centralizada no rodapé">
+            </div>
+        </footer>
+    </main>
+
+    <div id="modalVisualizarTema" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 3000; justify-content: center; align-items: center; padding: 20px;">
+        <div style="background: white; padding: 20px; border-radius: 12px; max-width: 800px; width: 100%; box-shadow: 0 4px 25px rgba(0,0,0,0.3); text-align: center; position: relative; max-height: 90vh; display: flex; flex-direction: column;">
+            
+            <h3 style="margin-bottom: 15px; color: #7A1919; font-size: 1.25rem;">Amostra do Tema Desenvolvido</h3>
+            
+            <div style="overflow-y: auto; flex: 1; display: flex; justify-content: center; align-items: center; background: #f8fafc; border-radius: 8px; padding: 10px;">
+                <img id="imagemAmostra" src="" alt="Amostra do site" style="max-width: 100%; max-height: 60vh; object-fit: contain; border-radius: 6px; display: none;">
+                <p id="textoSemAmostra" style="color: #64748b; font-size: 0.95rem; display: none;">O desenvolvedor ainda não anexou uma imagem modelo para este projeto.</p>
+            </div>
+            
+            <div style="margin-top: 15px; display: flex; justify-content: flex-end;">
+                <button type="button" onclick="fecharModalTema()" style="padding: 10px 24px; background: #7A1919; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; transition: opacity 0.2s;">Fechar Visualização</button>
+            </div>
+        </div>
+    </div>
+
+   
+
+<script src="js/cliente.js"></script>
+   
+    <script type="text/javascript">
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+
+   
+    Tawk_API.onLoad = function() {
+        try {
+            var dadosUsuario = localStorage.getItem("usuarioLogado");
+            if (dadosUsuario) {
+                var usuario = JSON.parse(dadosUsuario);
+                
+                var nomeFinal = usuario.nome || usuario.Nome || "Cliente Solicitante";
+                var emailFinal = usuario.email || usuario.Email || "";
+
+    
+                if (emailFinal) {
+                    Tawk_API.setAttributes({
+                        'name': nomeFinal,
+                        'email': emailFinal
+                    }, function(error) {
+                        if (error) console.log("Erro na API do chat:", error);
+                    });
+                    console.log("Dados enviados com sucesso para o Tawk.to:", nomeFinal, emailFinal);
+                }
+            }
+        } catch (erro) {
+            console.error("Erro ao processar dados para o chat:", erro);
+        }
+    };
+
+    (function(){
+        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/6a46c13f519a211d4d2e66d9/1jsi65nr7';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1, s0);
+    })();
+    </script>
+    </body>
+</html>
+
+
+
+
+
+
