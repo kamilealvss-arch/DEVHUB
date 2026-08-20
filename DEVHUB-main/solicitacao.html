@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitação - DevHub</title>
+    <link rel="stylesheet" href="css/solicitacao.css">
+    <link rel="icon" type="image/png" href="img/iconb.png">
+</head>
+
+<body>
+
+    <header>
+        <div class="topo">
+    <a href="index.html">
+        <img src="img/logo.png" alt="Logo do DevHub" class="logo">
+    </a>
+</div>
+        <nav>
+
+            <a href="login.html" id="btnSair" style="color: #fca5a5; font-weight: 600;">Sair</a>
+
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <aside class="lateral">
+            <div class="lateral-conteudo">
+                <h1 id="tituloFormulario">Nova Solicitação de Site</h1>
+                <p>Crie seu cadastro em segundos, centralize suas propostas comerciais, filtre briefings refinados e
+                    conecte-se sem intermediários burocráticos ou taxas abusivas.</p>
+
+                <div class="card-painel">
+                    <div class="icone-painel">
+                        <img src="img/brilho.png" alt="pindevhub">
+                    </div>
+                    <div>
+                        <h3>Tem uma ideia para um site?</h3>
+                        <p>Preencha as informações abaixo e envie sua solicitação para nossos desenvolvedores. Quanto
+                            mais detalhes você fornecer, mais fácil será transformar sua ideia em um projeto real.</p>
+                    </div>
+                </div>
+
+                <div class="card-painel">
+                    <div class="icone-painel">
+                        <img src="img/brilho.png" alt="pindevhub">
+                    </div>
+                    <div>
+                        <h3>Você pode incluir:</h3>
+                        <p>Objetivo do site, estilo visual desejado, funcionalidades importantes, referências ou
+                            inspirações.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="lateral-rodape">
+                <span>© DEVHUB 2026</span>
+                <span>BRASIL</span>
+            </div>
+        </aside>
+
+        <div class="conteiner">
+            <div class="cartao">
+                <div id="caixaErro" class="caixa-erro oculto"></div>
+
+                <form id="formularioSolicitacao">
+                    <fieldset>
+                        <legend>01. Identificação do Cliente</legend>
+                        <div class="grade-2-col">
+                            <div class="controle-formulario">
+                                <label for="nomeCliente">Nome Completo <span class="obrigatorio">*</span></label>
+                                <input type="text" id="nomeCliente" placeholder="Ex: Sara Silva" required>
+                            </div>
+                            <div class="controle-formulario">
+                                <label for="emailCliente">E-mail Corporativo <span class="obrigatorio">*</span></label>
+                                <input type="email" id="emailCliente" placeholder="Ex: nome@devhub.com" required>
+                            </div>
+                            <div class="controle-formulario">
+                                <label for="projetoNome">Nome do Projeto / Empresa</label>
+                                <input type="text" id="projetoNome" placeholder="Ex: DevHub ou Minha Loja Virtual"
+                                    required>
+                            </div>
+                        </div>
+                    </fieldset>
+
+
+                    <fieldset>
+                        <legend>02. Preferências Técnicas & Visuais</legend>
+                        <div class="grade-3-col">
+                            <div class="controle-formulario">
+                                <label for="tipoProjeto">Tipo de Site</label>
+                                <select id="tipoProjeto">
+                                    <option value="Landing Page">Landing Page</option>
+                                    <option value="E-Commerce">E-Commerce</option>
+                                    <option value="Blog Corporativo">Blog Corporativo</option>
+                                    <option value="Portal de Membros / EaD">Portal de Membros / EaD</option>
+                                    <option value="Dashboard Interno">Dashboard Interno</option>
+                                    <option value="Portfólio Pessoal">Portfólio Pessoal</option>
+                                    <option value="Site Institucional">Site Institucional</option>
+                                    <option value="Outro">Outro</option>
+                                </select>
+                            </div>
+
+                            <div class="controle-formulario">
+                                <label for="estiloVisual">Estilo Estético</label>
+                                <select id="estiloVisual">
+                                    <option value="Minimalista">Minimalista</option>
+                                    <option value="Corporativo">Corporativo</option>
+                                    <option value="Criativo / Moderno">Criativo</option>
+                                    <option value="Criativo / Moderno">Moderno</option>
+                                    <option value="Tech / Brutalista">Brutalista</option>
+                                    <option value="Tech / Brutalista">Tech</option>
+                                    <option value="Premium / Escuro">Vintage</option>
+                                    <option value="Premium / Escuro">Premium</option>
+                                    <option value="Outro">Outro</option>
+                                </select>
+                            </div>
+
+                            <div class="controle-formulario">
+                                <label for="preferenciaFonte">Família Tipográfica</label>
+                                <select id="preferenciaFonte">
+                                    <option value="Inter (Sans)">Inter (Sans)</option>
+                                    <option value="Playfair Display (Serif)">Playfair Display (Serif)</option>
+                                    <option value="Space Grotesk (Display)">Space Grotesk (Display)</option>
+                                    <option value="Montserrat (Moderna)">Montserrat (Moderna)</option>
+                                    <option value="JetBrains Mono (Técnica)">JetBrains Mono (Técnica)</option>
+                                    <option value="Outro">Outro</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grade-3-col margem-topo-4">
+                            <div class="controle-formulario">
+                                <label for="corPrincipal">Cor Principal do Tema</label>
+                                <select id="corPrincipal">
+                                    <option value="Vermelho">Bege/creme</option>
+                                    <option value="Azul Corporativo">Azul Corporativo</option>
+                                    <option value="Verde Esmeralda">Verde Esmeralda</option>
+                                    <option value="Preto Elegante">Preto Elegante</option>
+                                    <option value="Roxo Moderno">Roxo Moderno</option>
+                                    <option value="Outro">Outro</option>
+                                </select>
+                            </div>
+
+                            <div class="controle-formulario">
+                                <label for="faixaOrcamento">Orçamento Estimado</label>
+                                <select id="faixaOrcamento">
+                                    <option value="R$ 2.000 - R$ 5.000">R$ 2.000 - R$ 5.000</option>
+                                    <option value="R$ 5.000 - R$ 10.000" selected>R$ 5.000 - R$ 10.000</option>
+                                    <option value="R$ 10.000 - R$ 20.000">R$ 10.000 - R$ 20.000</option>
+                                    <option value="R$ 20.000+">R$ 20.000+</option>
+                                    <option value="Outro">Outro</option>
+                                </select>
+                            </div>
+
+                            <div class="controle-formulario">
+                                <label for="prazoEstimado">Prazo Estimado</label>
+                                <select id="prazoEstimado">
+                                    <option value="15 dias">15 dias</option>
+                                    <option value="30 dias" selected>30 dias</option>
+                                    <option value="45 dias">45 dias</option>
+                                    <option value="60 dias">60 dias</option>
+                                    <option value="90 dias+">90 dias+</option>
+                                    <option value="Outro">Outro</option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>03. Recursos & Mecânicas Desejadas</legend>
+                        <p class="subtitulo">Selecione todos os módulos interativos que farão parte do escopo:</p>
+
+                        <div class="grade-caixas-selecao">
+                            <label class="cartao-selecao"><input type="checkbox" name="recursos"
+                                    value="Área Restrita / Login"> Área Restrita / Login</label>
+                            <label class="cartao-selecao"><input type="checkbox" name="recursos"
+                                    value="Upload de Arquivos"> Upload de Arquivos</label>
+                            <label class="cartao-selecao"><input type="checkbox" name="recursos"
+                                    value="Formulário de Contato / Leads"> Formulário de Contato</label>
+                            <label class="cartao-selecao"><input type="checkbox" name="recursos"
+                                    value="Integração de E-mail Marketing"> E-mail Marketing</label>
+                            <label class="cartao-selecao"><input type="checkbox" name="recursos"
+                                    value="Banco de Dados Integrado"> Banco de Dados</label>
+                            <label class="cartao-selecao"><input type="checkbox" name="recursos"
+                                    value="Painel Administrativo"> Painel Admin</label>
+                            <label class="cartao-selecao"><input type="checkbox" name="recursos"
+                                    value="Animações Dinâmicas / Motion"> Animações / Motion</label>
+                            <label class="cartao-selecao"><input type="checkbox" name="recursos"
+                                    value="Gateway de Pagamento"> Pagamentos</label>
+                            <label class="cartao-selecao"><input type="checkbox" name="recursos"
+                                    value="Chat Online / Suporte"> Chat Online</label>
+                            <label class="cartao-selecao"><input type="checkbox" name="recursos"
+                                    value="Agendamento Automatizado"> Agendamento</label>
+                            <label class="cartao-selecao"><input type="checkbox" name="recursos"
+                                    value="Autenticação em Duas Etapas"> Autenticação em 2 Etapas</label>
+                            <label class="cartao-selecao"><input type="checkbox" name="recursos"
+                                    value="Acessibilidade Web (Vlibras / Contraste)"> Acessibilidade Web (Vlibras /
+                                Contraste)</label>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <div class="cabecalho-texto">
+                            <legend>04. Descrição do Escopo do Projeto</legend>
+                        </div>
+                        <div class="controle-formulario">
+                            <label for="descricao">O que você imagina para o site? Quais as metas principais?</label>
+                            <textarea id="descricao" rows="5"
+                                placeholder="Exemplo de briefing: Quero construir uma landing page de alta fidelidade..."
+                                required></textarea>
+                            <p class="dica-entrada">Forneça informações estruturadas de seu público-alvo e objetivos.
+                            </p>
+                        </div>
+                    </fieldset>
+
+                    <div class="controle-formulario margem-topo-4">
+                        <label for="arquivoExemplo" class="btn-secundario">Arquivo de Referência (Opcional)</label>
+                        <input type="file" id="arquivoExemplo" accept="image/*,.pdf,.zip,.rar">
+                        <p class="dica-entrada">Formatos aceitos: Imagens, PDF, ZIP ou RAR (Máx. 5MB).</p>
+                    </div>
+
+                    <div class="acoes-formulario">
+                        <button type="button" id="btnCancelar" class="btn-secundario">Cancelar e Sair</button>
+                        <button type="submit" id="btnEnviar" class="btn-primario">Enviar para Intermediação ➔</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/solicitacao.js"></script>
+</body>
+
+</html>
