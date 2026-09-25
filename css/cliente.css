@@ -21,23 +21,23 @@ body {
 
 }
 
-header {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background: linear-gradient(90deg, #8d1f1f, #a83232);
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 40px;
-    height: 80px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+/* Estiliza o contêiner ou a imagem diretamente */
+header .logo {
+    width: 250px; /* Aumentado para compensar a borda da imagem */
+    max-height: 60px; /* Impede que ultrapasse a altura do header de 80px */
+    height: auto;
+    object-fit: contain;
+    margin-top: 0;
 }
 
-header .logo {
-    width: 180px;
-    margin-top: 10px;
+header img.logo {
+    height: 45px !important;
+    width: auto !important;
+    max-width: none !important;
+    transform: scale(2.8); /* Amplia o conteúdo interno do PNG */
+    transform-origin: left center; /* Mantém a logo alinhada à esquerda */
+    margin-left: 15px; /* Ajusta o espaçamento lateral */
+    display: block;
 }
 
 nav a {

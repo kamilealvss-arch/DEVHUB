@@ -1,10 +1,11 @@
 const DB_URL = "https://htlyccadeagvimfphadt.supabase.co";
 const DB_KEY = "sb_publishable_eug-hn_UvVN-fjH7PXBG2Q_RSDvC069";
 
-  const devLogado = localStorage.getItem("devLogado");
-  if (!devLogado) {
-  window.location.href = "login-dev.html";} 
-  const supabaseClient = supabase.createClient(DB_URL, DB_KEY);
+const devLogado = localStorage.getItem("devLogado");
+if (!devLogado) {
+  window.location.href = "login-dev.html";
+} 
+const supabaseClient = supabase.createClient(DB_URL, DB_KEY);
 
 const corpoDaTabela = document.getElementById('corpo-tabela');
 const campoBusca = document.querySelector('.campo-busca');
@@ -13,11 +14,10 @@ const btnFechar = document.getElementById('btn-fechar-modal');
 const btnCancelar = document.getElementById('btn-cancelar-modal');
 const btnSalvarModal = document.getElementById('btn-salvar-modal');
 
-
 let todasAsSolicitacoes = []; 
 let filtroAbaAtual = 'Tudo';
 let termoBuscaAtual = '';
-let idProjetoSendoAvaliado = null; // Guarda o ID do projeto aberto no modal
+let idProjetoSendoAvaliado = null;
 
 const opcoesDeStatus = ["PENDENTE", "EM ANÁLISE", "APROVADO", "RECUSADO", "CONCLUÍDO"];
 const mapeamentoDeCores = {
@@ -35,7 +35,7 @@ const mapaFiltroParaStatus = {
   "Concluídos": "CONCLUÍDO"
 };
 
-// 3. CARREGAR DADOS DO SUPABASE (Read)
+// 1. CARREGAR DADOS DO SUPABASE
 async function carregarDadosDoBanco() {
   try {
     const { data, error } = await supabaseClient
@@ -50,15 +50,16 @@ async function carregarDadosDoBanco() {
     atualizarMetricas();
   } catch (err) {
     console.error("Erro ao carregar solicitações do Supabase:", err);
-    corpoDaTabela.innerHTML = `<tr><td colspan="5" style="text-align:center; color:red; padding:20px;">Falha ao conectar ao banco de dados.</td></tr>`;
+    corpoDaTabela.innerHTML = `<tr><td colspan="6" style="text-align:center; color:red; padding:20px;">Falha ao conectar ao banco de dados.</td></tr>`;
   }
 }
 
+// 2. RENDERIZAR TABELA COM A NOVA COLUNA DE VALOR DEFINIDO
 function renderizarTabela(dados) {
   corpoDaTabela.innerHTML = '';
 
   if (dados.length === 0) {
-    corpoDaTabela.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#6b7280; padding:20px;">Nenhuma solicitação encontrada para o filtro atual.</td></tr>`;
+    corpoDaTabela.innerHTML = `<tr><td colspan="6" style="text-align:center; color:#6b7280; padding:20px;">Nenhuma solicitação encontrada para o filtro atual.</td></tr>`;
     return;
   }
 
@@ -74,6 +75,11 @@ function renderizarTabela(dados) {
       const isSelected = statusAtual === opcao ? 'selected' : '';
       return `<option value="${opcao}" ${isSelected}>Mudar para ${opcao}</option>`;
     }).join('');
+
+    // Formatação do valor definido pelo dev
+    const valorExibicao = solicitacao.valor_final
+      ? `R$ ${parseFloat(solicitacao.valor_final).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+      : '<span style="color: #9ca3af; font-style: italic;">Pendente</span>';
 
     const linha = document.createElement('tr');
     linha.innerHTML = `
@@ -100,6 +106,9 @@ function renderizarTabela(dados) {
           ` : ''}
         </div>
       </td>
+      <td class="centro" style="font-weight: bold; color: #2e7d32; font-size: 14px;">
+        ${valorExibicao}
+      </td>
       <td class="centro">
         <div class="coluna-status">
           <span class="badge ${classeBadge}">${statusAtual}</span>
@@ -121,6 +130,7 @@ function renderizarTabela(dados) {
   });
 }
 
+// 3. ALTERAÇÃO RÁPIDA DE STATUS
 corpoDaTabela.addEventListener('change', async (e) => {
   if (e.target.classList.contains('select-status')) {
     const id = parseInt(e.target.dataset.id);
@@ -145,7 +155,7 @@ corpoDaTabela.addEventListener('change', async (e) => {
   }
 });
 
-
+// 4. ABRIR MODAL COM OS DADOS DO PROJETO
 function abrirModal(id) {
   const projeto = todasAsSolicitacoes.find(item => item.id === id);
   if (!projeto) return;
@@ -161,7 +171,11 @@ function abrirModal(id) {
     containerArquivo.style.padding = '12px';
     containerArquivo.style.borderRadius = '6px';
     containerArquivo.style.background = '#f3f4f6';
-    document.getElementById('modal-proposta').parentNode.insertBefore(containerArquivo, document.getElementById('modal-proposta'));
+    
+    const elemProposta = document.getElementById('modal-proposta');
+    if (elemProposta && elemProposta.parentNode) {
+      elemProposta.parentNode.insertBefore(containerArquivo, elemProposta);
+    }
   }
 
   if (projeto.arquivo_url) {
@@ -205,6 +219,12 @@ function abrirModal(id) {
 
   document.getElementById('modal-descricao').textContent = `"${projeto.descricao || 'Sem descrição.'}"`;
   
+  // Preenche o valor definido se já existir
+  const campoValor = document.getElementById('modal-valor-definido');
+  if (campoValor) {
+    campoValor.value = projeto.valor_final !== null && projeto.valor_final !== undefined ? projeto.valor_final : '';
+  }
+
   document.getElementById('modal-proposta').value = projeto.resposta_dev || '';
   document.getElementById('modal-notas').value = projeto.notas_internas || '';
   
@@ -219,15 +239,17 @@ function fecharModal() {
   idProjetoSendoAvaliado = null;
 }
 
+// 5. SALVAR VALOR DEFINIDO, PROPOSTA E AMSTRA NO SUPABASE
 async function salvarPropostaENotas() {
   if (!idProjetoSendoAvaliado) return;
 
+  const campoValor = document.getElementById('modal-valor-definido');
+  const valorDigitado = campoValor ? campoValor.value.trim() : '';
   const textoProposta = document.getElementById('modal-proposta').value.trim();
   const textoNotas = document.getElementById('modal-notas').value.trim();
   const inputArquivo = document.getElementById("modal-arquivo-amostra");
   
   let urlPublicaImagem = "";
-
 
   if (inputArquivo && inputArquivo.files.length > 0) {
     const arquivo = inputArquivo.files[0];
@@ -254,7 +276,9 @@ async function salvarPropostaENotas() {
     }
   }
 
+  // Prepara os dados para salvar
   const dadosAtualizados = {
+    valor_final: valorDigitado !== '' ? parseFloat(valorDigitado) : null,
     resposta_dev: textoProposta,
     notas_internas: textoNotas
   };
@@ -273,7 +297,7 @@ async function salvarPropostaENotas() {
 
     if (error) throw error;
 
-    alert("Proposta e dados atualizados com sucesso!");
+    alert("Proposta e valor salvos com sucesso!");
     fecharModal();
     await carregarDadosDoBanco(); 
   } catch (err) {
@@ -282,6 +306,7 @@ async function salvarPropostaENotas() {
   }
 }
 
+// LISTENERS DE EVENTOS
 corpoDaTabela.addEventListener('click', (e) => {
   const btn = e.target.closest('.botao-avaliar');
   if (btn) abrirModal(parseInt(btn.dataset.id));
@@ -312,7 +337,6 @@ document.querySelectorAll('.aba').forEach(aba => {
   });
 });
 
-
 function aplicarFiltros() {
   let resultado = todasAsSolicitacoes;
 
@@ -341,9 +365,11 @@ function atualizarMetricas() {
 
 document.addEventListener('DOMContentLoaded', carregarDadosDoBanco);
 
-document.getElementById('btn-sair-dev').addEventListener('click', async () => {
- 
+const btnSairDev = document.getElementById('btn-sair-dev');
+if (btnSairDev) {
+  btnSairDev.addEventListener('click', async () => {
     localStorage.removeItem("devLogado");
     await supabaseClient.auth.signOut();
     window.location.href = "login-dev.html";
-});
+  });
+}

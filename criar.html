@@ -16,10 +16,10 @@
 
   <header>
     <div class="topo">
-    <a href="index.html">
+      <a href="index.html">
         <img src="img/logo.png" alt="Logo do DevHub" class="logo">
-    </a>
-</div>
+      </a>
+    </div>
   </header>
 
 
@@ -93,6 +93,7 @@
               <th>USUÁRIO / CLIENTE</th>
               <th>E-MAIL</th>
               <th>DESCRIÇÃO DETALHADA DO SITE</th>
+              <th class="centro">VALOR DEFINIDO</th>
               <th class="centro">STATUS INTERNO</th>
               <th class="direita">AÇÕES TÉCNICAS</th>
             </tr>
@@ -143,7 +144,7 @@
               <strong class="valor-dado" id="modal-cor"></strong>
             </div>
             <div>
-              <span class="label-dado">Orçamento Recomendado:</span>
+              <span class="label-dado">Orçamento Estimado:</span>
               <strong class="valor-dado texto-vermelho" id="modal-preco"></strong>
             </div>
             <div>
@@ -171,6 +172,16 @@
         </div>
 
         <div class="area-inputs">
+          <!-- Campo para o Dev inserir o valor final do projeto -->
+          <div class="grupo-input" style="margin-bottom: 15px;">
+            <label>VALOR FINAL DO PROJETO / PAGAMENTO (R$) <span class="badge-verde">VALOR QUE O CLIENTE IRÁ PAGAR</span></label>
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <span style="font-weight: bold; font-size: 16px; color: #2e7d32;">R$</span>
+              <input type="number" id="modal-valor-definido" step="0.01" min="0" placeholder="0,00"
+                style="width: 100%; padding: 10px; border: 1px solid #2e7d32; border-radius: 6px; font-size: 15px; font-weight: bold; color: #2e7d32; background: #f4fbf7;">
+            </div>
+          </div>
+
           <div class="grupo-input">
             <label>PROPOSTA / MENSAGEM PÚBLICA PARA O CLIENTE <span class="badge-verde">VISÍVEL NO PAINEL DO
                 CLIENTE</span></label>
@@ -194,8 +205,7 @@
 
       <div class="modal-footer">
         <button class="btn-cancelar" id="btn-cancelar-modal">Fechar</button>
-        <button class="btn-salvar" id="btn-salvar-modal"> Salvar Proposta & Notas</button>
-        </button>
+        <button class="btn-salvar" id="btn-salvar-modal">Salvar Proposta & Valor</button>
       </div>
 
     </div>
@@ -208,7 +218,7 @@
   </footer>
 
   <script src="js/criar.js"></script>
-  
+
 </body>
 
 </html>
